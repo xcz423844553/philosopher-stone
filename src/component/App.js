@@ -31,7 +31,9 @@ class App extends React.Component {
           <Content>
           <Route exact path="/" component={PostList} />
             <Route exact path="/postlist" component={PostList} />
-            <Route exact path="/post/:title" component={Post} />
+            <Route exact path="/post/:title" render={({match}) => (
+              <Post title={match.params.title}/>
+            )} />
           </Content>
           <Footer style={{ textAlign: 'center' }}>Az</Footer>
         </Layout>
