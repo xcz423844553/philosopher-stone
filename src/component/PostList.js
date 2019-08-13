@@ -21,7 +21,7 @@ const data = [
     },
     {
       title: 'SQL Study Notes',
-      url: '2019-08-06-SQL-Study-Notes',
+      url: '2019-08-06-sql-study-notes',
       date: '2019-08-06',
     },
   ];

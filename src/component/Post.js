@@ -2,7 +2,16 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import ReactMarkdown from 'react-markdown';
-import AppMarkdown from '../asset/post/2019-08-06-SQL-Study-Notes.md';
+import doc1 from '../asset/post/2019-04-16-how-to-install-github-on-ubuntu.md';
+import doc2 from '../asset/post/2019-04-16-how-to-install-mysql-on-ubuntu.md';
+import doc3 from '../asset/post/2019-04-17-how-to-use-git.md';
+import doc4 from '../asset/post/2019-08-06-sql-study-notes.md';
+
+let docs = {};
+docs['2019-04-16-how-to-install-github-on-ubuntu'] = doc1;
+docs['2019-04-16-how-to-install-mysql-on-ubuntu'] = doc2;
+docs['2019-04-17-how-to-use-git'] = doc3;
+docs['2019-08-06-sql-study-notes'] = doc4;
 
 export class Post extends React.Component {
     constructor(props) {
@@ -13,10 +22,13 @@ export class Post extends React.Component {
     }
 
     componentDidMount() {
-        const path = require('../asset/post/'+this.props.title+'.md');
-        fetch(path)
-        .then(res => res.text())
-        .then(text => this.setState({markdown: text}));
+        // const path = require('../asset/post/' + this.props.title + '.md');
+        // fetch(path)
+        //     .then(res => res.text())
+        //     .then(text => this.setState({ markdown: text }));
+        fetch(docs[this.props.title])
+            .then(res => res.text())
+            .then(text => this.setState({ markdown: text }));
     }
 
     render() {
@@ -27,9 +39,9 @@ export class Post extends React.Component {
                     <Breadcrumb.Item>List</Breadcrumb.Item>
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                 </Breadcrumb>
-                <ReactMarkdown 
-                source={this.state.markdown} 
-                escapeHtml={true}
+                <ReactMarkdown
+                    source={this.state.markdown}
+                    escapeHtml={true}
                 />
             </div>
         );
