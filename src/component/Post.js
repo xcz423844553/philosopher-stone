@@ -6,6 +6,7 @@ import doc1 from '../asset/post/2019-04-16-how-to-install-github-on-ubuntu.md';
 import doc2 from '../asset/post/2019-04-16-how-to-install-mysql-on-ubuntu.md';
 import doc3 from '../asset/post/2019-04-17-how-to-use-git.md';
 import doc4 from '../asset/post/2019-08-06-sql-study-notes.md';
+import MarkdownHighlighter from './MarkdownHighlighter';
 
 let docs = {};
 docs['2019-04-16-how-to-install-github-on-ubuntu'] = doc1;
@@ -40,8 +41,10 @@ export class Post extends React.Component {
                     <Breadcrumb.Item>App</Breadcrumb.Item>
                 </Breadcrumb>
                 <ReactMarkdown
+                    className="post_content"
                     source={this.state.markdown}
-                    escapeHtml={true}
+                    escapeHtml={false}
+                    renderers={{ code: MarkdownHighlighter }}
                 />
             </div>
         );

@@ -1,21 +1,13 @@
----
-layout: post
-title:  "SQL Study Notes"
-date:   2019-08-06 23:12
-categories: [Study Notes]
-tags: [SQL]
----
-
 ## 1. SELECT Statement
 
 ### 1.1 SELECT
-{% highlight sql %}
+```sql
 SELECT column1, column2, column3 FROM table_name;
 SELECT * FROM table_name;
-{% endhighlight %}
+```
 
 ### 1.2 SELECT DISTINCT
-{% highlight sql %}
+```sql
 SELECT DISTINCT column1, column2, column3 FROM table_name;
 SELECT DISTINCT * FROM table_name;
 // Following SQL statement lists the number of different (distinct) customer countries.
@@ -23,75 +15,75 @@ SELECT DISTINCT * FROM table_name;
 SELECT COUNT(DISTINCT Country) FROM Customers;
 //Here is the workaround for MS Access.
 SELECT Count(*) AS DistinctCountries FROM (SELECT DISTINCT Country FROM Customers);
-{% endhighlight %}
+```
 
 ## 2. WHERE Clause
-{% highlight sql %}
+```sql
 // Text fields
 SELECT * FROM Customers WHERE Country='Mexico';
 // Numeric fields
 SELECT * FROM Customers WHERE CustomerID=1;
-{% endhighlight %}
+```
 
 ### 2.1 Operators in WHERE Clause
-=	Equal	
->	Greater than	
-<	Less than	
->= Greater than or equal	
-<= Less than or equal	
-<> Not equal. Note: In some versions of SQL this operator may be written as !=	
-BETWEEN	Between a certain range	
-LIKE	Search for a pattern	
-IN	To specify multiple possible values for a column
+- `=`	Equal	
+- `>`	Greater than	
+- `<`	Less than	
+- `>=` Greater than or equal	
+- `<=` Less than or equal	
+- `<>` Not equal. Note: In some versions of SQL this operator may be written as !=	
+- `BETWEEN`	Between a certain range	
+- `LIKE`	Search for a pattern	
+- `IN`	To specify multiple possible values for a column
 
 ### 2.2 AND, OR and NOT Operators
-{% highlight sql %}
+```sql
 // AND Syntax
 SELECT column1, column2 FROM table_name WHERE condition1 AND condition2 AND condition3;
 // OR Syntax
 SELECT column1, column2 FROM table_name WHERE condition1 OR condition2 OR condition3;
 // NOT Syntax
 SELECT column1, column2 FROM table_name WHERE NOT condition;
-{% endhighlight %}
+```
 
 ### 2.3 ORDER BY Syntax
-{% highlight sql %}
+```sql
 SELECT column1, column2 FROM table_name ORDER BY column1, column2, ... ASC|DESC;
 SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;
-{% endhighlight %}
+```
 
 ## 3. INSERT INTO Statement
-{% highlight sql %}
+```sql
 INSERT INTO table_name (column1, column2, column3) VALUES (value1, value2, value3);
 // If you are adding values for all the columns of the table, you do not need to specify the column names in the SQL query.
 INSERT INTO table_name VALUES (value1, value2, value3);
-{% endhighlight %}
+```
 
 ## 4. NULL Value
-{% highlight sql %}
+```sql
 // IS NULL Syntax
 SELECT column_names FROM table_name WHERE column_name IS NULL;
 // IS NOT NULL Syntax
 SELECT column_names FROM table_name WHERE column_name IS NOT NULL;
-{% endhighlight %}
+```
 
 ## 5. UPDATE Statement
-{% highlight sql %}
+```sql
 UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
-{% endhighlight %}
+```
 
 ## 6. DELETE Statement
-{% highlight sql %}
+```sql
 DELETE FROM table_name WHERE condition;
 DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
 // Delete all records
 DELETE FROM table_name;
-{% endhighlight %}
+```
 
 ## 7. TOP, LIMIT or ROWNUM Clause
 The SELECT TOP clause is used to specify the number of records to return.
 The SELECT TOP clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
-{% highlight sql %}
+```sql
 // SQL Server / MS Access Syntax:
 SELECT TOP number|PERCENT column_name(s) FROM table_name WHERE condition;
 SELECT TOP 50 PERCENT * FROM Customers;
@@ -105,32 +97,32 @@ SELECT column_name(s) FROM table_name WHERE ROWNUM <= number;
 // The following SQL statement shows the equivalent example using ROWNUM:
 SELECT * FROM Customers WHERE ROWNUM <= 3;
 SELECT * FROM Customers WHERE Country='Germany' AND ROWNUM <= 3;
-{% endhighlight %}
+```
 
 ## 8. MIN() and MAX() Functions
 The MIN() function returns the smallest value of the selected column.
 The MAX() function returns the largest value of the selected column.
-{% highlight sql %}
+```sql
 // MIN() Syntax
 SELECT MIN(column_name) FROM table_name WHERE condition;
 SELECT MIN(Price) AS SmallestPrice FROM Products;
 // MAX() Syntax
 SELECT MAX(column_name) FROM table_name WHERE condition;
 SELECT MAX(Price) AS LargestPrice FROM Products;
-{% endhighlight %}
+```
 
 ## 9. COUNT(), AVG() and SUM() Functions
 The COUNT() function returns the number of rows that matches a specified criteria.
 The AVG() function returns the average value of a numeric column.
 The SUM() function returns the total sum of a numeric column.
-{% highlight sql %}
+```sql
 // COUNT() Syntax
 SELECT COUNT(column_name) FROM table_name WHERE condition;
 // AVG() Syntax
 SELECT AVG(column_name) FROM table_name WHERE condition;
 // SUM() Syntax
 SELECT SUM(column_name) FROM table_name WHERE condition;
-{% endhighlight %}
+```
 
 ## 10. LIKE Operator
 The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
@@ -138,10 +130,10 @@ There are two wildcards often used in conjunction with the LIKE operator:
 - % The percent sign represents zero, one, or multiple characters
 - _ The underscore represents a single character
 MS Access uses an asterisk (*) instead of the percent sign (%), and a question mark (?) instead of the underscore (_).
-{% highlight sql %}
+```sql
 // LIKE Syntax
 SELECT column1, column2 FROM table_name WHERE columnN LIKE pattern;
-{% endhighlight %}
+```
 
 ### 10.1 Wildcard Characters
 Wildcard Characters in MS Access:
@@ -162,17 +154,17 @@ _	Represents a single character	"h_t finds hot, hat, and hit"
 ## 11. IN Operator
 The IN operator allows you to specify multiple values in a WHERE clause.
 The IN operator is a shorthand for multiple OR conditions.
-{% highlight sql %}
+```sql
 // IN Syntax
 SELECT column_name(s) FROM table_name WHERE column_name IN (value1, value2);
 // IN Syntax with another SELECT statement
 SELECT column_name(s) FROM table_name WHERE column_name IN (SELECT STATEMENT);
-{% endhighlight %}
+```
 
 ## 12. BETWEEN Operator
 The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
 The BETWEEN operator is inclusive: begin and end values are included. 
-{% highlight sql %}
+```sql
 // BETWEEN Syntax
 SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2;
 SELECT * FROM Products WHERE Price BETWEEN 10 AND 20;
@@ -185,10 +177,10 @@ SELECT * FROM Products WHERE ProductName NOT BETWEEN 'abcd' AND 'efgh' ORDER BY 
 // BETWEEN dates
 SELECT * FROM Orders WHERE OrderDate BETWEEN #01/07/1996# AND #31/07/1996#;
 SELECT * FROM Orders WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
-{% endhighlight %}
+```
 
 ## 13. SQL Aliases
-{% highlight sql %}
+```sql
 // Alias Column Syntax
 SELECT column_name AS alias_name FROM table_name;
 
@@ -209,10 +201,10 @@ SELECT CustomerName, CONCAT(Address,', ',PostalCode,', ',City,', ',Country) AS A
 SELECT o.OrderID, o.OrderDate, c.CustomerName
 FROM Customers AS c, Orders AS o
 WHERE c.CustomerName="Around the Horn" AND c.CustomerID=o.CustomerID;
-{% endhighlight %}
+```
 
 ## 14. INNER JOIN
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table1
 INNER JOIN table2
@@ -227,10 +219,10 @@ ON Orders.CustomerID=Customers.CustomerID;
 SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
 FROM ((Orders INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
 INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
-{% endhighlight %}
+```
 
 ## 15. LEFT JOIN
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table1
 LEFT JOIN table2
@@ -240,10 +232,10 @@ SELECT Customers.CustomerName, Orders.OrderID
 FROM Customers
 LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID
 ORDER BY Customers.CustomerName;
-{% endhighlight %}
+```
 
 ## 16. RIGHT JOIN
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table1
 RIGHT JOIN table2
@@ -253,10 +245,10 @@ SELECT Orders.OrderID, Employees.LastName, Employees.FirstName
 FROM Orders
 RIGHT JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
 ORDER BY Orders.OrderID;
-{% endhighlight %}
+```
 
 ## 17. FULL OUTER JOIN
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table1
 FULL OUTER JOIN table2
@@ -267,10 +259,10 @@ SELECT Customers.CustomerName, Orders.OrderID
 FROM Customers
 FULL OUTER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
 ORDER BY Customers.CustomerName;
-{% endhighlight %}
+```
 
 ## 18. Self JOIN
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table1 T1, table1 T2
 WHERE condition;
@@ -280,10 +272,10 @@ FROM Customers A, Customers B
 WHERE A.CustomerID <> B.CustomerID
 AND A.City = B.City 
 ORDER BY A.City;
-{% endhighlight %}
+```
 
 ## 19. UNION Operator
-{% highlight sql %}
+```sql
 // UNION Syntax
 SELECT column_name(s) FROM table1
 UNION
@@ -302,10 +294,10 @@ UNION
 SELECT City, Country FROM Suppliers
 WHERE Country='Germany'
 ORDER BY City;
-{% endhighlight %}
+```
 
 ## 20. GROUP BY Statement
-{% highlight sql %}
+```sql
 // GROUP BY Syntax
 SELECT column_name(s)
 FROM table_name
@@ -323,10 +315,10 @@ ORDER BY COUNT(CustomerID) DESC;
 SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders
 LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
 GROUP BY ShipperName;
-{% endhighlight %}
+```
 
 ## 21. HAVING Clause
-{% highlight sql %}
+```sql
 // HAVING Syntax
 SELECT column_name(s)
 FROM table_name
@@ -347,18 +339,18 @@ INNER JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID
 WHERE LastName = 'Davolio' OR LastName = 'Fuller'
 GROUP BY LastName
 HAVING COUNT(Orders.OrderID) > 25;
-{% endhighlight %}
+```
 
 ## 22. EXISTS Operator
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table_name
 WHERE EXISTS
 (SELECT column_name FROM table_name WHERE condition);
-{% endhighlight %}
+```
 
 ## 23. ANY Operator
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table_name
 WHERE column_name operator ANY
@@ -367,10 +359,10 @@ WHERE column_name operator ANY
 SELECT ProductName
 FROM Products
 WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
-{% endhighlight %}
+```
 
 ## 24. ALL Operator
-{% highlight sql %}
+```sql
 SELECT column_name(s)
 FROM table_name
 WHERE column_name operator ALL
@@ -379,10 +371,10 @@ WHERE column_name operator ALL
 SELECT ProductName
 FROM Products
 WHERE ProductID = ALL (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
-{% endhighlight %}
+```
 
 ## 25. SELECT INTO Statement
-{% highlight sql %}
+```sql
 // Copy all columns into a new table:
 SELECT *
 INTO newtable [IN externaldb]
@@ -407,10 +399,10 @@ FROM Customers;
 SELECT * INTO newtable
 FROM oldtable
 WHERE 1 = 0;
-{% endhighlight %}
+```
 
 ## 26. INSERT INTO  SELECT Statement
-{% highlight sql %}
+```sql
 // INSERT INTO SELECT Syntax
 // Copy all columns from one table to another table:
 INSERT INTO table2
@@ -422,10 +414,10 @@ INSERT INTO table2 (column1, column2, column3, ...)
 SELECT column1, column2, column3, ...
 FROM table1
 WHERE condition;
-{% endhighlight %}
+```
 
 ## 27. CASE Statement
-{% highlight sql %}
+```sql
 // CASE Syntax
 CASE
     WHEN condition1 THEN result1
@@ -449,10 +441,10 @@ ORDER BY
     WHEN City IS NULL THEN Country
     ELSE City
 END);
-{% endhighlight %}
+```
 
 ## 28. NULL Functions
-{% highlight sql %}
+```sql
 // MySQL IFNULL() or COALESCE()
 SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))
 FROM Products;
@@ -463,10 +455,10 @@ FROM Products;
 // SQL Server ISNULL()
 SELECT ProductName, UnitPrice * (UnitsInStock + ISNULL(UnitsOnOrder, 0))
 FROM Products;
-{% endhighlight %}
+```
 
 ## 29. Comment
-{% highlight sql %}
+```sql
 // Single Line Comment
 --Select all:
 SELECT * FROM Customers;
@@ -476,20 +468,20 @@ SELECT * FROM Customers;
 of all the records
 in the Customers table:*/
 SELECT * FROM Customers;
-{% endhighlight %}
+```
 
 ## 30. CREATE DATABASE Statement
-{% highlight sql %}
+```sql
 CREATE DATABASE databasename;
-{% endhighlight %}
+```
 
 ## 31. DROP DATABASE Statement
-{% highlight sql %}
+```sql
 DROP DATABASE databasename;
-{% endhighlight %}
+```
 
 ## 32. CREATE TABLE Statement
-{% highlight sql %}
+```sql
 CREATE TABLE table_name (
     column1 datatype,
     column2 datatype,
@@ -502,21 +494,21 @@ CREATE TABLE new_table_name AS
     SELECT column1, column2,...
     FROM existing_table_name
     WHERE ....;
-{% endhighlight %}
+```
 
 ## 33. DROP TABLE Statement
-{% highlight sql %}
+```sql
 DROP TABLE table_name;
-{% endhighlight %}
+```
 
 ## 34. TRUNCATE TABLE Statement
 The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
-{% highlight sql %}
+```sql
 TRUNCATE TABLE table_name;
-{% endhighlight %}
+```
 
 ## 35. ALTER TABLE Statement
-{% highlight sql %}
+```sql
 // ADD Column
 ALTER TABLE table_name
 ADD column_name datatype;
@@ -535,7 +527,7 @@ DROP COLUMN Email;
 // MySQL
 ALTER TABLE table_name
 MODIFY COLUMN column_name datatype;
-{% endhighlight %}
+```
 
 ## 36. Constraints
 The following constraints are commonly used in SQL:
@@ -546,7 +538,7 @@ The following constraints are commonly used in SQL:
   CHECK - Ensures that all values in a column satisfies a specific condition
   DEFAULT - Sets a default value for a column when no value is specified
   INDEX - Used to create and retrieve data from the database very quickly
-{% highlight sql %}
+```sql
 // Create Constraints
 CREATE TABLE table_name (
     column1 datatype constraint,
@@ -554,20 +546,20 @@ CREATE TABLE table_name (
     column3 datatype constraint,
     ....
 );
-{% endhighlight %}
+```
 
 ### 36.1 NOT NULL Constraint
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     ID int NOT NULL,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255) NOT NULL,
     Age int
 );
-{% endhighlight %}
+```
 
 ### 36.2 UNIQUE Constraint
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     ID int NOT NULL,
     LastName varchar(255) NOT NULL,
@@ -594,13 +586,13 @@ ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
 // DROP a UNIQUE Constraint
 ALTER TABLE Persons
 DROP INDEX UC_Person;
-{% endhighlight %}
+```
 
 ### 36.3 PRIMARY KEY Constraint
 The PRIMARY KEY constraint uniquely identifies each record in a table.
 Primary keys must contain UNIQUE values, and cannot contain NULL values.
 A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     ID int NOT NULL,
     LastName varchar(255) NOT NULL,
@@ -617,13 +609,13 @@ CREATE TABLE Persons (
     Age int,
     CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
 );
-{% endhighlight %}
+```
 
 ### 36.4 FOREIGN KEY Constraint
 A FOREIGN KEY is a key used to link two tables together.
 A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
 The table containing the foreign key is called the child table, and the table containing the candidate key is called the referenced or parent table.
-{% highlight sql %}
+```sql
 CREATE TABLE Orders (
     OrderID int NOT NULL,
     OrderNumber int NOT NULL,
@@ -640,11 +632,11 @@ CREATE TABLE Orders (
     CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID)
     REFERENCES Persons(PersonID)
 );
-{% endhighlight %}
+```
 
 ### 36.5 CHECK Constraint
 CHECK on CREATE TABLE
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     ID int NOT NULL,
     LastName varchar(255) NOT NULL,
@@ -661,26 +653,26 @@ CREATE TABLE Persons (
     City varchar(255),
     CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Sandnes')
 );
-{% endhighlight %}
+```
 
 CHECK on ALTER TABLE
-{% highlight sql %}
+```sql
 ALTER TABLE Persons
 ADD CHECK (Age>=18);
 
 ALTER TABLE Persons
 ADD CONSTRAINT CHK_PersonAge CHECK (Age>=18 AND City='Sandnes');
-{% endhighlight %}
+```
 
 DROP a CHECK Constraint
-{% highlight sql %}
+```sql
 ALTER TABLE Persons
 DROP CHECK CHK_PersonAge;
-{% endhighlight %}
+```
 
 ### 36.6 DEFAULT Constraint
 DEFAULT on CREATE TABLE
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     ID int NOT NULL,
     LastName varchar(255) NOT NULL,
@@ -688,52 +680,52 @@ CREATE TABLE Persons (
     Age int,
     City varchar(255) DEFAULT 'Sandnes'
 );
-{% endhighlight %}
+```
 The DEFAULT constraint can also be used to insert system values, by using functions like GETDATE():
-{% highlight sql %}
+```sql
 CREATE TABLE Orders (
     ID int NOT NULL,
     OrderNumber int NOT NULL,
     OrderDate date DEFAULT GETDATE()
 );
-{% endhighlight %}
+```
 DEFAULT on ALTER TABLE
-{% highlight sql %}
+```sql
 ALTER TABLE Persons
 ALTER City SET DEFAULT 'Sandnes';
-{% endhighlight %}
+```
 DROP a DEFAULT Constraint
-{% highlight sql %}
+```sql
 ALTER TABLE Persons
-{% endhighlight %}
+```
 
 ## 37. CREATE INDEX Statement
 CREATE INDEX Syntax
 - Creates an index on a table. Duplicate values are allowed.
-{% highlight sql %}
+```sql
 CREATE INDEX index_name
 ON table_name (column1, column2, ...);
 
 CREATE INDEX idx_pname
 ON Persons (LastName, FirstName);
-{% endhighlight %}
+```
 
 CREATE UNIQUE INDEX Syntax
 - Creates a unique index on a table. Duplicate values are not allowed.
-{% highlight sql %}
+```sql
 CREATE UNIQUE INDEX index_name
 ON table_name (column1, column2, ...);
-{% endhighlight %}
+```
 
 ## 38. DROP INDEX Statement
-{% highlight sql %}
+```sql
 ALTER TABLE table_name
 DROP INDEX index_name;
-{% endhighlight %}
+```
 
 ## 39. AUTO INCREMENT Field
 - By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
-{% highlight sql %}
+```sql
 CREATE TABLE Persons (
     Personid int NOT NULL AUTO_INCREMENT,
     LastName varchar(255) NOT NULL,
@@ -741,12 +733,12 @@ CREATE TABLE Persons (
     Age int,
     PRIMARY KEY (Personid)
 );
-{% endhighlight %}
+```
 
 To let the AUTO_INCREMENT sequence start with another value, use the following SQL statement.
-{% highlight sql %}
+```sql
 ALTER TABLE Persons AUTO_INCREMENT=100;
-{% endhighlight %}
+```
 
 ## 40. Dates
 MySQL comes with the following data types for storing a date or a date/time value in the database:
@@ -754,14 +746,14 @@ MySQL comes with the following data types for storing a date or a date/time valu
 - DATETIME - format: YYYY-MM-DD HH:MI:SS
 - TIMESTAMP - format: YYYY-MM-DD HH:MI:SS
 - YEAR - format YYYY or YY
-{% highlight sql %}
-{% endhighlight %}
+```sql
+```
 
 ## 41. CREATE VIEW Statement
 - A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.
 - A view always shows up-to-date data! The database engine recreates the data, using the view's SQL statement, every time a user queries a view.
 CREATE VIEW Syntax
-{% highlight sql %}
+```sql
 CREATE VIEW view_name AS
 SELECT column1, column2, ...
 FROM table_name
@@ -771,14 +763,14 @@ CREATE VIEW [Products Above Average Price] AS
 SELECT ProductName, Price
 FROM Products
 WHERE Price > (SELECT AVG(Price) FROM Products);
-{% endhighlight %}
+```
 
 Update a VIEW with CREATE OR REPLACE VIEW Statement
-{% highlight sql %}
+```sql
 CREATE OR REPLACE VIEW view_name AS
 SELECT column1, column2, ...
 FROM table_name
-WHERE condition;{% endhighlight %}
+WHERE condition;```
 
 ## 42. MySQL Functions Reference
 Refer to https://www.w3schools.com/sql/sql_ref_mysql.asp
