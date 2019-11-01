@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import { PostList } from './PostList';
 import { Post } from './Post';
+import { Homepage } from './Homepage';
 import { Link, Route } from 'react-router-dom'
 
 const { Header, Footer, Content } = Layout;
@@ -14,7 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Layout>
+        <Route exact path="/" component={Homepage} />
+        {/* <Layout>
           <Header>
             <div className="logo" />
             <Menu
@@ -36,7 +38,7 @@ class App extends React.Component {
             )} />
           </Content>
           <Footer style={{ textAlign: 'center' }}>Az</Footer>
-        </Layout>
+        </Layout> */}
       </div>
     );
   }
